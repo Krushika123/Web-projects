@@ -1,0 +1,57 @@
+<html>
+      <head>
+      <title>Insert a Record in MySQL Database</title>
+   </head>
+      <body>
+	  <?php
+      $con = mysqli_connect('localhost','root',"",'student_db');
+    mysqli_select_db($con,'student_db');
+    $rollno=$_POST['rollno'];
+    $Sname=$_POST['Sname'];
+    $sub1=$_POST['sub1'];
+    $sub2=$_POST['sub2'];
+    $sub3=$_POST['sub3'];
+    $sub4=$_POST['sub4'];
+    $sub5=$_POST['sub5'];
+    $total=$sub1+$sub2+$sub3+$sub4+$sub5;
+    $avg=$total/5;
+    if($avg>=80){
+      $class="DISTINCTION";
+    }
+    else if($avg>=60){
+     $class="FIRST CLASS";
+   }
+   else if($avg>=50){
+     $class="SECOND CLASS";
+   }
+   else{
+     $class="FAIL";
+   }
+
+
+
+    $sql_u = "SELECT * FROM mark WHERE rollno='$rollno'";
+    $result = mysqli_query($con, $sql_u);
+
+    if(mysqli_num_rows($result)){
+      echo "Criminal already exists";
+    }
+    else {
+      $reg = "insert into mark(rollno,Sname,sub1,sub2,sub3,sub4,sub5,total,average,class) values ('$rollno','$Sname','$sub1','$sub2','$sub3','$sub4','$sub5','$total','$avg','$class')";
+      mysqli_query($con, $reg);
+       $rslt = mysqli_query($con,"SELECT * FROM mark where rollno='$rollno'");
+       while($row = mysqli_fetch_array($rslt))
+          $rollno = $row['rollno'];
+      echo "<center><table>
+      <tr><td>Roll No.</td><td>$rollno</td></tr>
+      <tr><td>Name</td><td>$Sname</td></tr>
+      <tr><td>Sub1</td><td>$sub1</td></tr>
+      <tr><td>Sub2</td><td>$sub2</td></tr>
+      <tr><td>Sub3</td><td>$sub3</td></tr>
+      <tr><td>Sub4</td><td>$sub4</td></tr>
+      <tr><td>Sub5</td><td>$sub5</td></tr>
+      </table></center>";
+    }
+
+
+    ?>

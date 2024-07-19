@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="report.css">
+    <title>REPORT</title>
+</head>
+<body>
+    <?php
+           
+			
+            $con = mysqli_connect('localhost','root',"",'student_db');
+    mysqli_select_db($con,'student_db');
+	  $rollno = $_POST['rollno'];
+	  /*if(isset($_POST['submit'])){
+            $Sname = $_POST['Sname'];
+            $sub1 = $_POST['sub1'];
+			$sub2 = $_POST['sub2'];
+			$sub3 = $_POST['sub3'];
+			$sub4 = $_POST['sub4'];
+			$sub5 = $_POST['sub5'];*/
+	  
+          mysqli_select_db($con, 'student_db');
+          $rollno=$_POST["rollno"];
+          $sql_u = "SELECT * FROM mark WHERE rollno='$rollno'";
+          $result = mysqli_query($con, $sql_u);
+          if(mysqli_num_rows($result)){
+          
+           $result = mysqli_query($con,"SELECT * from mark WHERE rollno=$rollno");
+        //    $_SESSION["name"]=$result["name"];
+        //    echo "WELCOME".$_SESSION['name'];
+        //    echo "<table id='myTable' border='1'>
+        //    <tr>
+        //       <th>USN</th>
+        //       <th>Name</th>
+        //       <th>sub1</th>
+        //       <th>sub2</th>
+        //       <th>sub3</th>
+        //       <th>sub4</th>
+        //       <th>sub5</th>
+              
+        //    </tr>";
+            
+        while($row = mysqli_fetch_array($result)) {
+            $_SESSION["Sname"]=$row["Sname"];
+            
+            echo "WELOCME ".$_SESSION["Sname"];
+            echo "<table id='myTable' border='1'>
+            <tr>";
+           echo "<tr><td>ROLL</td><td>" . $row['rollno'] . "</td></tr>";
+           echo "<tr><td>NAME</td><td>" . $row['Sname'] . "</td></tr>";
+           echo "<tr><td>SUB1</td><td>" . $row['sub1'] . "</td></tr>";
+           
+           echo "<tr><td>SUB2</td><td>" . $row['sub2'] . "</td></tr>";
+           echo "<tr><td>SUB3</td><td>" . $row['sub3'] . "</td></tr>";
+           echo "<tr><td>SUB4</td><td>" . $row['sub4'] . "</td></tr>";
+           echo "<tr><td>SUB5</td><td>" . $row['sub5'] . "</td></tr>";
+           
+        
+           //    echo "
+        //        <td width='140px'>
+        //        <form action='delete.php' method='get'>
+        //          <a href='accept.php'><button class='button1' name='status' value=".$row['usn'].">Remove</button></a>
+        //        </form></td>"
+        //      ;
+           echo "</tr>";
+        }
+        echo "</table>";
+          }
+          else{
+            echo "User do not exist";
+          }
+	  
+    ?>
+</body>
+</html>
