@@ -1,0 +1,47 @@
+<html>
+      <head>
+      <title>Update a Record in MySQL Database</title>
+   </head>
+      <body>
+      <?php
+        $emp_id = $_POST['emp_id'];
+            $emp_name = $_POST['emp_name'];
+            $emp_salary = $_POST['emp_salary'];
+
+            $servername="localhost";
+	  $username="root";
+	  $password="";
+	  $db="emp_db";
+	  $conn=mysqli_connect( $servername,$username,$password,$db);
+	   if(!$conn) {
+               die('Could not connect: ' . mysqli_connect_error());
+            }
+			else{
+				echo "connected successfully";
+			}
+          mysqli_select_db($conn,"emp_db");
+            
+            if($emp_id != '' || $emp_name != '' || $emp_salary != '')
+	   {
+          $sql = mysqli_query($conn,"UPDATE emp SET Ename='$emp_name', Esalary='$emp_salary' WHERE empno = '$emp_id'") ;
+           echo "Updated data successfully<br>";
+	   }
+	   else
+	   {
+		  echo "updation failed"; 
+	   }
+	   
+     $sql = " select *  from emp";
+	 echo "Eno: $emp_id";
+			echo "<br>";
+			echo "Ename: $emp_name";
+echo "<br>";			
+			echo "Esalary: $emp_salary"; 
+			echo "<br>";
+ 
+           
+            
+            mysqli_close($conn);
+         //}
+
+ ?>

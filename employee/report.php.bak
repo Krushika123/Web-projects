@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="report.css">
+    <title>REPORT</title>
+</head>
+<body>
+    <?php
+          session_start();
+
+          $con = mysqli_connect('localhost','root',"","emp_db");
+          mysqli_select_db($con, 'emp_db');
+          $empno=$_POST["empno"];
+          $sql_u = "SELECT * FROM emp WHERE empno='$empno'";
+          $result = mysqli_query($con, $sql_u);
+          if(mysqli_num_rows($result)){
+          
+           $result = mysqli_query($con,"SELECT * from emp WHERE empno=$empno");
+        //    $_SESSION["name"]=$result["name"];
+        //    echo "WELCOME".$_SESSION['name'];
+        //    echo "<table id='myTable'>
+        //    <tr>
+        //       <th>USN</th>
+        //       <th>Name</th>
+        //       <th>sub1</th>
+        //       <th>sub2</th>
+        //       <th>sub3</th>
+        //       <th>sub4</th>
+        //       <th>sub5</th>
+              
+        //    </tr>";
+            
+        while($row = mysqli_fetch_array($result)) {
+            $_SESSION["ename"]=$row["ename"];
+            
+            echo "WELCOME ".$_SESSION["ename"];
+            echo "<table id='table' border='1'>
+            <tr>";
+           echo "<tr><td>EMPNO:</td><td>" . $row['empno'] . "</td></tr>";
+           echo "<tr><td>ENAME</td><td>" . $row['Ename'] . "</td></tr>";
+           echo "<tr><td>BSALARY:</td><td>" . $row['Esalary'] . "</td></tr>";
+           
+           echo "<tr><td>DA:</td><td>" . $row['da'] . "</td></tr>";
+           echo "<tr><td>HRA:</td><td>" . $row['hra'] . "</td></tr>";
+           echo "<tr><td>MA:</td><td>" . $row['ma'] . "</td></tr>";
+           echo "<tr><td>INSURANCE:</td><td>" . $row['insurance'] . "</td></tr>";
+           echo "<tr><td>NETSALARY:</td><td>" . $row['netsalary'] . "</td></tr>";
+          
+           
+        
+           //    echo "
+        //        <td width='140px'>
+        //        <form action='delete.php' method='get'>
+        //          <a href='accept.php'><button class='button1' name='status' value=".$row['usn'].">Remove</button></a>
+        //        </form></td>"
+        //      ;
+           echo "</tr>";
+        }
+        echo "</table>";
+          }
+          else{
+            echo "User do not exist";
+          }
+    ?>
+</body>
+</html>

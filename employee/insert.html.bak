@@ -1,0 +1,18 @@
+<html>
+<body>
+<marquee><h2>Emp insertion </h2></marquee>
+<form method="POST" action="insert.php">
+<h1> Enter emp_id</h1>
+   Emp_id :  <input type="text" name="emp_id" >
+      <br><br>
+<h1> Enter employee name</h1>
+   Employee name : <input type="text" name="emp_name">
+      <br><br>
+<h1> Enter basic salary</h1>
+   Employee salary : <input type="text" name="emp_salary" >
+      <br><br>
+     
+   <input type="submit" name="submit" value="Submit">
+</form>
+</body>
+</html>

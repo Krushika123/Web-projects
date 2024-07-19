@@ -1,0 +1,33 @@
+<html>
+      <head>
+      <title>Deleting a Record in MySQL Database</title>
+   </head>
+      <body>
+      <?php
+        $emp_id = $_POST['emp_id'];
+           
+
+            $servername="localhost";
+	  $username="root";
+	  $password="";
+	  $db="emp_db";
+	  $conn=mysqli_connect( $servername,$username,$password,$db);
+	   if(!$conn) {
+               die('Could not connect: ' . mysqli_connect_error());
+			   echo "<br>";
+            }
+			else{
+				echo "connected successfully";
+				echo "<br>";
+			}
+          $sql = "delete  from emp  WHERE empno = '$emp_id' " ;
+          
+           mysqli_select_db($conn,"emp_db");
+           
+          $sql = " select *  from emp";
+            echo "deleted data successfully<br>";
+            
+            mysqli_close($conn);
+         //}
+
+ ?>

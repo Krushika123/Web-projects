@@ -1,0 +1,41 @@
+<html>
+      <head>
+      <title>Insert a Record in MySQL Database</title>
+   </head>
+      <body>
+      <?php
+     if(isset($_POST['submit'])){
+    $con = mysqli_connect('localhost','root',"","emp_db");
+    mysqli_select_db($con,'emp_db');
+    $empno=$_POST['empno'];
+    $Ename=$_POST['Ename'];
+    $Esalary=$_POST['Esalary'];
+  
+    $da=(0.80)*$Esalary;
+   $hra=(0.15)*$Esalary;
+   $ma=(0.12)*$Esalary;
+  $insurance=(0.10)*$Esalary;
+  $netsalary=$Esalary+$hra+$ma-$insurance;
+
+    $sql_u = "SELECT * FROM emp WHERE empno='$empno'";
+    $result = mysqli_query($con, $sql_u);
+
+    if(mysqli_num_rows($result)){
+      echo "Criminal already exists";
+    }
+    else {
+      $reg = "insert into emp(empno,Ename,Esalary,da,hra,ma,insurance,netsalary) values ('$empno','$Ename','$Esalary','$da','$hra','$ma','$insurance','$netsalary')";
+      mysqli_query($con, $reg);
+       $rslt = mysqli_query($con,"SELECT * FROM emp where empno='$empno'");
+       while($row = mysqli_fetch_array($rslt))
+          $rollno = $row['rollno'];
+      echo "<center><table>
+      <tr><td>Emp-No.</td><td>$empno</td></tr>
+      <tr><td>Ename</td><td>$ename</td></tr>
+      <tr><td>Bsalary</td><td>$bsalary</td></tr>
+      
+      </table></center>";
+    }
+
+     }
+    ?>

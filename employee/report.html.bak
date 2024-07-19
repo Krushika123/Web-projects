@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>report</title>
+</head>
+<body>
+    <marquee><h2>Student delete</h2></marquee>
+<form method="POST" action="report.php">
+<h1> Enter Rollno</h1>
+   Rollno :  <input type="text" name="rollno" >
+      <br><br>
+    
+   <input type="submit" name="submit" value="Submit">
+</form>
+</body>
+</html>
